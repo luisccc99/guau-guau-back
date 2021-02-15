@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration[6.0]
       t.string :title, null: false
       t.text :body, null: false
       t.string :photo
-      t.boolean :resolved
+      t.boolean :resolved, default: false
       t.string :resolved_reason
       
       t.belongs_to :user, index: true

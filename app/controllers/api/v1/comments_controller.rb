@@ -1,57 +1,68 @@
 class Api::V1::CommentsController < ApplicationController
-#TODO: Añadir validación
+#Get the id before request for update, delete or find.
+before_action :get_comment_id, only: [:update, :destroy, :show]
     #GET
-    def getComments
-        comm = Comment.all
-        if !comm.empty?
-            render json: comm, status: :ok
+    def index
+        comment = Comment.all
+        if !comment.empty?
+            render json: comment, status: :ok
         else
-            render json: {message: "There's nothing here yet."}, status: :unprocessable_entity
+            render json: {message: "There's nothing here yet."}, status: :no_content
+        end
+    end
+
+    #GET
+    #singularGet
+    def show
+        if @found
+            render json: @found, status: :ok
+        else
+            render json: {message: "Not found."}, status: :no_content
         end
     end
 
     #POST
-    def addComment
-        newComment = Comment.new(commentparams)
+    def create
+        new_comment = Comment.new(comment_params)
 
-        if newComment.save()
-            render json: newComment, status: :ok
+        if new_comment.save()
+            render json: new_comment, status: :created
         else
             render json: {message: "Unable to comment."}, status: :conflict
     end
 
     #PATCH
-    def patchComment
-        if @findedcomment
-            if @findedcomment.update(commentparams)
-                render json: @findedComment, status: :ok
+    def update
+        if @found
+            if @found.update(comment_params)
+                render json: @found, status: :ok
             else
                 render json: {message: "Failed to update."}, status: :unprocessable_entity
             end
         else
-            render json: {message: "Comment not found"}, status: :unprocessable_entity
+            render json: {message: "Comment not found"}, status: :no_content
         end
     end
 
     #DELETE
-    def delComment
-        if @findedcomment
-            if @findedcomment.destroy()
+    def destroy
+        if @found
+            if @found.destroy()
                 render json: {message: "Comment destroyed"}, status: :ok
             else
-                render json: {message: "Failed to delete"}, status: :unprocessable_entity
+                render json: {message: "Failed to delete"}, status: :conflict
             end
         else
-            render json: {message: "Comment not found"}, status: :unprocessable_entity
+            render json: {message: "Comment not found"}, status: :no_content
         end
     end
 
     private
-    def commentparams
+    def comment_params
         #Checar si es necesario ingresar la FK o no. Omitida por el momento
         params.permit(:body)
     end
-    def getcommentID
-        @findedcomment = Comment.find(params[:id])
+    def get_comment_id
+        @found = Comment.find(params[:id])
     end
 end
