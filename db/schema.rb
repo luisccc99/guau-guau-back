@@ -12,4 +12,16 @@
 
 ActiveRecord::Schema.define(version: 2021_02_10_205326) do
 
+# Could not dump table "comments" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
+
+# Could not dump table "localizations" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
+
+# Could not dump table "posts" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
+
+# Could not dump table "users" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
+
 end
