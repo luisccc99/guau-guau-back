@@ -9,9 +9,9 @@ Rails.application.routes.draw do
         delete 'post', action: :destroy, controller: :posts
 
         #Localizations Table
-        get 'index', action: :index, controller: :localizations
-        get 'show', action: :show, controller: :localizations
-        delete 'destroy', action: :destroy, controller: :localizations
+        get 'localizations', action: :index, controller: :localizations
+        get 'localization', action: :show, controller: :localizations
+        delete 'localization', action: :destroy, controller: :localizations
 
         #Users Table
         get 'users', action: :index, controller: :users
@@ -21,11 +21,11 @@ Rails.application.routes.draw do
         delete 'user', action: :destroy, controller: :users
 
         #Comments Table
-        get 'index', action: :index, controller: :comments
-        get 'show', action: :show, controller: :comments
-        post 'create', action: :create, controller: :comments
-        patch 'update', action: :update, controller: :comments
-        delete 'destroy', action: :destroy, controller: :comments
+        get 'comments', action: :index, controller: :comments
+        get 'comment', action: :show, controller: :comments
+        post 'comments', action: :create, controller: :comments
+        patch 'comment', action: :update, controller: :comments
+        delete 'comment', action: :destroy, controller: :comments
 
       end
     end
