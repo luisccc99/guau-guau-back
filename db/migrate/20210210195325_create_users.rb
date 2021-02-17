@@ -5,8 +5,8 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :password_digest, null: false
       t.string :name, null: false
       t.string :lastname, null: false
-      t.integer :num_posts
-      t.integer :resolved_posts
+      t.integer :num_posts, default: 0
+      t.integer :resolved_posts, default: 0
 
       t.timestamps
     end
