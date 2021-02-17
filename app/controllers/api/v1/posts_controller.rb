@@ -1,6 +1,6 @@
 class Api::V1::PostsController < ApplicationController
 #Get the id before request for update, delete or find.
-before_action :get_post_id, only: [:update, :destroy, :show]
+    before_action :get_post_id, only: [:update, :destroy, :show]
     #GET
     def index
         posts = Post.where("resolved = false", params[:resolved])
@@ -29,6 +29,7 @@ before_action :get_post_id, only: [:update, :destroy, :show]
             render json: new_post, status: :ok
         else
             render json: {message: "Unable to add new post."}, status: :conflict
+        end
     end
 
     #PATCH
@@ -60,7 +61,7 @@ before_action :get_post_id, only: [:update, :destroy, :show]
     private
     def post_params
         #Checar si es necesario ingresar la FK o no. Omitida por el momento
-        params.permit(:title, :body, :photo, :resolved, :resolved_reason)
+        params.require(:post).permit(:title, :body, :photo, :resolved, :resolved_reason)
     end
     def get_post_id
         @found = Post.find(params[:id])

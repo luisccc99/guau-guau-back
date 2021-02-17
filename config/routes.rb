@@ -2,11 +2,11 @@ Rails.application.routes.draw do
     namespace :api do
       namespace :v1 do
         #Posts Table
-        get 'index', action: :index, controller: :posts
-        get 'show', action: :show, controller: :posts
-        post 'create', action: :create, controller: :posts
-        patch 'update', action: :update, controller: :posts
-        delete 'destroy', action: :destroy, controller: :posts
+        get 'posts', action: :index, controller: :posts
+        get 'post', action: :show, controller: :posts
+        post 'posts', action: :create, controller: :posts
+        patch 'post', action: :update, controller: :posts
+        delete 'post', action: :destroy, controller: :posts
 
         #Localizations Table
         get 'index', action: :index, controller: :localizations
@@ -14,11 +14,11 @@ Rails.application.routes.draw do
         delete 'destroy', action: :destroy, controller: :localizations
 
         #Users Table
-        get 'index', action: :index, controller: :users
-        get 'show', action: :show, controller: :users
-        post 'create', action: :creater, controller: :users
-        patch 'update', action: :update, controller: :users
-        delete 'destroy', action: :destroy, controller: :users
+        get 'users', action: :index, controller: :users
+        get 'user', action: :show, controller: :users
+        post 'users', action: :create, controller: :users
+        patch 'user', action: :update, controller: :users
+        delete 'user', action: :destroy, controller: :users
 
         #Comments Table
         get 'index', action: :index, controller: :comments
