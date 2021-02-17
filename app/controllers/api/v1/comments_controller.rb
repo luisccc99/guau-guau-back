@@ -1,6 +1,6 @@
 class Api::V1::CommentsController < ApplicationController
 #Get the id before request for update, delete or find.
-before_action :get_comment_id, only: [:update, :destroy, :show]
+    before_action :get_comment_id, only: [:update, :destroy, :show]
     #GET
     def index
         comment = Comment.all
@@ -29,6 +29,7 @@ before_action :get_comment_id, only: [:update, :destroy, :show]
             render json: new_comment, status: :created
         else
             render json: {message: "Unable to comment."}, status: :conflict
+        end
     end
 
     #PATCH
