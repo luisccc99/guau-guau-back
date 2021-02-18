@@ -1,6 +1,7 @@
 class Api::V1::PostsController < ApplicationController
 #Get the id before request for update, delete or find.
-    before_action :authorization, :get_post_id, only: [:update, :destroy, :show]
+    before_action :authorization, only: [:create, :index, :update, :destroy, :show]
+    before_action :get_post_id, only: [:update, :destroy, :show]
     #GET
     def index
         posts = Post.where("resolved = false", params[:resolved])
