@@ -1,6 +1,6 @@
 class Api::V1::CommentsController < ApplicationController
 #Get the id before request for update, delete or find.
-    before_action :get_comment_id, only: [:update, :destroy, :show]
+    before_action :authorization, :get_comment_id, only: [:update, :destroy, :show]
     #GET
     def index
         comment = Comment.all
@@ -60,7 +60,6 @@ class Api::V1::CommentsController < ApplicationController
 
     private
     def comment_params
-        #Checar si es necesario ingresar la FK o no. Omitida por el momento
         params.permit(:body)
     end
     def get_comment_id

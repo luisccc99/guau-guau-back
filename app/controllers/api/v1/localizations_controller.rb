@@ -1,6 +1,6 @@
 class Api::V1::LocalizationsController < ApplicationController
 #Get the id before request for find.
-before_action :get_localization_id, only: [:show]
+before_action :authorization, :get_localization_id, only: [:show]
     def index
         localization = Localization.all
         if !localization.empty?
