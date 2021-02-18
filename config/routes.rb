@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
     namespace :api do
       namespace :v1 do
+      post 'login', action: :login, controller: :auth
         #Posts Table
         get 'posts', action: :index, controller: :posts
         get 'post', action: :show, controller: :posts
