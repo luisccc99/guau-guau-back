@@ -60,7 +60,7 @@ class Api::V1::CommentsController < ApplicationController
 
     private
     def comment_params
-        params.permit(:body)
+        params.permit(:body, :post, :user)
     end
     def get_comment_id
         @found = Comment.find(params[:id])

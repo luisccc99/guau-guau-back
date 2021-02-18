@@ -61,7 +61,7 @@ class Api::V1::PostsController < ApplicationController
     private
     def post_params
         #Checar si es necesario ingresar la FK o no. Omitida por el momento
-        params.require(:post).permit(:title, :body, :photo, :resolved, :resolved_reason)
+        params.require(:post).permit(:title, :body, :photo, :resolved, :resolved_reason, :user)
     end
     def get_post_id
         @found = Post.find(params[:id])

@@ -35,7 +35,7 @@ before_action :authorization, :get_localization_id, only: [:show]
 
     private
         def localization_params 
-            params.permit(:X, :Y)
+            params.permit(:X, :Y, :post)
         end
         def get_localization_id
             @found = Localization.find(params[:id])
