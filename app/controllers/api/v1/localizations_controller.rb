@@ -1,6 +1,6 @@
 class Api::V1::LocalizationsController < ApplicationController
 #Get the id before request for find.
-before_action :get_localization_id, only: [:show]
+before_action :authorization, :get_localization_id, only: [:show]
     def index
         localization = Localization.all
         if !localization.empty?
@@ -35,7 +35,7 @@ before_action :get_localization_id, only: [:show]
 
     private
         def localization_params 
-            params.permit(:X, :Y)
+            params.permit(:X, :Y, :post)
         end
         def get_localization_id
             @found = Localization.find(params[:id])

@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
 #Get the id before request for update, delete or find.
+before_action :authorization, only: [:update, :destroy]
 before_action :get_user_id, only: [:update, :destroy, :show]
     #GET
     def index
