@@ -8,7 +8,7 @@ class ApplicationController < ActionController::API
         secret_key = Rails.application.secrets.secret_key_base[0]
         decoded_token = JWT.decode(token, secret_key)[0]
         
-        @user = user.find(decoded_token["user_id"])
+        @user = User.find(decoded_token["user_email"])
         end
     end
 end
