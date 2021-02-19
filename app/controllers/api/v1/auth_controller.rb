@@ -1,6 +1,6 @@
-class AuthController < ApplicationController
+class Api::V1::AuthController < ApplicationController
     def login
-        user = User.find_by(id: params[:id])
+        user = User.find_by(email: params[:email])
 
         if !user
             render json: {error: "Invalid user."}, status: :conflict
