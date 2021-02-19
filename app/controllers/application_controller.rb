@@ -11,4 +11,13 @@ class ApplicationController < ActionController::API
         @user = User.find(decoded_token["user_email"])
         end
     end
+
+    def authenticate!
+        token = request.headers['Authorization']&.split(' ').last
+        payload = JsonWebToken.decode(token)
+        @current_user = User.find(payload[:user_id])
+
+    rescue JWT::DecodeError => e 
+        render json: {errors: e.message}, status: :forbidden  
+    end
 end
