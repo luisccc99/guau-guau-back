@@ -1,3 +1,4 @@
+=begin
 require 'rails_helper'
 require 'faker'
 
@@ -28,3 +29,4 @@ describe 'Posts API', type: :request do
     
   end
 end
+=end

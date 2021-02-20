@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :user do
-    email { "luisccc99@gmail.com" }
-    name { "Luis" }
-    lastname { "Cruz" }
+    email { "mikeyy@gmail.com" }
+    name { "Mike" }
+    lastname { "Valdez" }
     password { "joemama" }
-    photo {"url/jpg.com"}
+    photo {"url2/jpg.com"}
   end
 end
