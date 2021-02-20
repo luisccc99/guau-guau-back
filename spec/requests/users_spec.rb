@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'faker'
 
 describe 'Users API', type: :request do
 
@@ -19,6 +20,7 @@ describe 'Users API', type: :request do
           password: 'hello',
           name: Faker::Name.name.split()[0],
           lastname: Faker::Name.name.split()[1],
+          photo: "http://url.com/dh.jpg",
           num_posts: 0,
           resolved_posts: 0
         }
