@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
         @user = User.find(payload[:user_email])
         end
         
-    rescue JWT::DecodeError => e
+    rescue  JWT::DecodeError => e
         render json: {errors: e.message}, status: :forbidden  
     end
 end
