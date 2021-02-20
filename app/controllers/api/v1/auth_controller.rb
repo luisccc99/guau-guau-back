@@ -5,9 +5,8 @@ class Api::V1::AuthController < ApplicationController
         if !user
             render json: {error: "Invalid user."}, status: :conflict
         elsif user.authenticate(params[:password])
-            secret_key = Rails.application.secrets.secret_key_base[0]
-            token = JWT.encode({user_id: user.id}, secret_key)
-            render json: {token: token, message: "Correct credentials."}, status: :ok
+            token, exp = JsonWebToken.encode({user_id: user.id}, secret_key)
+            render json: {token: token, message: "Correct credentials.", expiration_time: exp.strftime('%d-%m-%Y %H:%M:%S')}, status: :ok
         else
             render json: {message: "Wrong credentials."}, status: :unauthorized
         end

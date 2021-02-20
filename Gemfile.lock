@@ -94,6 +94,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.11.1-x86_64-linux)
       racc (~> 1.4)
+    pg (1.2.3)
     puma (4.3.7)
       nio4r (~> 2.0)
     racc (1.5.2)
@@ -174,6 +175,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   jwt (~> 2.2)
+  pg (~> 1.2, >= 1.2.3)
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
   rspec-rails
