@@ -36,11 +36,13 @@ before_action :get_user_id, only: [:update, :destroy, :show]
     #PATCH
     def update
         if @found
-            if @found.update(user_params)
-                render json: @found, status: :ok
-            else
-                render json: {message: "Failed to update."}, status: :unprocessable_entity
-            end
+            if @found.id != @user.id
+                render json: {message: "Access unauthorized."}, status: :unauthorized
+                elsif @found.update(user_params)
+                    render json: @found, status: :ok
+                else
+                    render json: {message: "Failed to update."}, status: :unprocessable_entity
+                end
         else
             render json: {message: "User not found"}, status: :no_content
         end

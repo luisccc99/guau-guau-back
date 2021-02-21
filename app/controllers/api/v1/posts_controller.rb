@@ -2,6 +2,7 @@ class Api::V1::PostsController < ApplicationController
 #Get the id before request for update, delete or find.
     before_action :authorization, only: [:create, :index, :update, :destroy, :show]
     before_action :get_post_id, only: [:update, :destroy, :show]
+    
     #GET
     def index
         posts = Post.where("resolved = false", params[:resolved])
@@ -25,7 +26,7 @@ class Api::V1::PostsController < ApplicationController
     #POST
     def create
         new_post = Post.new(post_params)
-
+        
         if new_post.save()
             render json: new_post, status: :ok
         else
@@ -36,10 +37,13 @@ class Api::V1::PostsController < ApplicationController
     #PATCH
     def update
         if @found
-            if @found.update(post_params)
-                render json: @found, status: :ok
-            else
-                render json: {message: "Failed to update."}, status: :unprocessable_entity
+            if @found.user_id != @user.id
+                render json: {message: "Access unauthorized."}, status: :unauthorized
+            elsif @found.update(post_params)
+                    render json: @found, status: :ok
+                else
+                    render json: {message: "Failed to update."}, status: :unprocessable_entity
+                end
             end
         else
             render json: {message: "Post not found"}, status: :no_content
@@ -49,10 +53,13 @@ class Api::V1::PostsController < ApplicationController
     #DELETE
     def destroy
         if @found
-            if @found.destroy()
-                render json: {message: "Post destroyed"}, status: :ok
-            else
-                render json: {message: "Failed to delete"}, status: :conflict
+            if @found.user_id != @user.id
+                render json: {message: "Access unauthorized."}, status: :unauthorized
+            elsif @found.destroy()
+                    render json: {message: "Post destroyed"}, status: :ok
+                else
+                    render json: {message: "Failed to delete"}, status: :conflict
+                end
             end
         else
             render json: {message: "Post not found"}, status: :no_content
