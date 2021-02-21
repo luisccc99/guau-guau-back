@@ -1,4 +1,3 @@
-=begin
 require 'rails_helper'
 require 'faker'
 
@@ -6,16 +5,20 @@ describe 'Posts API', type: :request do
 
   describe 'GET /posts' do
 
-    it 'returns no content if theres any post' do
-      get '/api/v1/posts'
-  
-      expect(response).to have_http_status(:no_content)
-    end
-  
+    it 'fails with no token' do
+      get api_v1_posts_path
+      
+      parsed_body = JSON.parse(response.body)
+      expect(parsed_body['message']).to eq 'Unauthorized'
+      expect(response).to have_http_status(:unauthorized)
+    end  
+
     it 'returns all post' do
       FactoryBot.create(:user)
       FactoryBot.create(:post, title: Faker::DcComics.title, body: "I lost my pet", photo: "http://url.com/dh.jpg")
       get api_v1_posts_path
+
+      byebug
 
       expect(response).to have_http_status(:ok)
     end
@@ -29,4 +32,4 @@ describe 'Posts API', type: :request do
     
   end
 end
-=end
+

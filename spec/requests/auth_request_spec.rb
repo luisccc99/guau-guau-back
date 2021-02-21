@@ -16,6 +16,7 @@ RSpec.describe "Auths", type: :request do
           email: @user.email,
           password: @user.password
         }
+        
         post api_v1_login_path, params: params
         parsed_body = JSON.parse(response.body)
         expect(parsed_body["message"]).to eq @expected_message
