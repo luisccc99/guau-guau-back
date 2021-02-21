@@ -9,6 +9,7 @@ describe 'Users API', type: :request do
       it 'returns no content when there are not users' do
         get api_v1_users_path
         #TODO: expect message ... 
+
         expect(response.body).to be_empty
         expect(response).to have_http_status(:no_content)
       end  
@@ -49,7 +50,7 @@ describe 'Users API', type: :request do
       post api_v1_users_path
 
       parsed_body = JSON.parse(response.body)
-      # expect(parsed_body['message']).to eq('Unable to add new user.')
+      expect(parsed_body['message']).to eq('Unable to add new user.')
       expect(response).to have_http_status(:conflict)
     end
 

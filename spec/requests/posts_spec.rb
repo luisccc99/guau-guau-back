@@ -4,12 +4,15 @@ require 'faker'
 describe 'Posts API', type: :request do
 
   describe 'GET /posts' do
+
     it 'fails with no token' do
       get api_v1_posts_path
-
+      
+      parsed_body = JSON.parse(response.body)
+      expect(parsed_body['message']).to eq 'Unauthorized'
       expect(response).to have_http_status(:unauthorized)
-    end
-  
+    end  
+
     it 'returns all post' do
       FactoryBot.create(:user)
       FactoryBot.create(:post, title: Faker::DcComics.title, body: "I lost my pet", photo: "http://url.com/dh.jpg")

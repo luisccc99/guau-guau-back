@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::API
     def authorization
-        authorization_header = request.headers['Authorization']&.split(' ').last
+        if request.headers.key?("Authorization") 
+            authorization_header = request.headers['Authorization']&.split(' ').last
+        end
         if !authorization_header
             render json: {message: "Unauthorized"}, status: :unauthorized
         else
