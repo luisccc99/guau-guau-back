@@ -1,7 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 <h1 align="center">Hi, this is the start of the repo for GuauGuau project!</h1>
 <h3 align="center">ITCHII Project</h3>
 
