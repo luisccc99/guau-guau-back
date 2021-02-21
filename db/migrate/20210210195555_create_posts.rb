@@ -7,7 +7,7 @@ class CreatePosts < ActiveRecord::Migration[6.0]
       t.boolean :resolved, default: false
       t.string :resolved_reason
       
-      t.belongs_to :user, index: true
+      t.belongs_to :user, foreign_key: true, type: :string
       t.timestamps
     end
   end

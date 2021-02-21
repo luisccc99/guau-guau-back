@@ -1,12 +1,12 @@
 class Api::V1::LocalizationsController < ApplicationController
 #Get the id before request for find.
-before_action :authorization, :get_localization_id, only: [:show]
+before_action :authorization, :get_localization_id, only: [:show, :delete]
     def index
         localization = Localization.all
         if !localization.empty?
             render json: localization, status: :ok
         else
-            render json: {message: "No localizations."}, status: :no_content
+            render json: {message: "No locations."}, status: :no_content
         end
     end
 
@@ -29,13 +29,13 @@ before_action :authorization, :get_localization_id, only: [:show]
                 render json: {message: "Failed to delete."}, status: :unprocessable_entity
             end
         else
-            render json: {message: "Comment not found"}, status: :no_content
+            render json: {message: "Location not found"}, status: :no_content
         end
     end
 
     private
         def localization_params 
-            params.permit(:X, :Y, :post)
+            params.permit(:X, :Y, :post_id)
         end
         def get_localization_id
             @found = Localization.find(params[:id])

@@ -24,4 +24,8 @@ ActiveRecord::Schema.define(version: 2021_02_10_205326) do
 # Could not dump table "users" because of following StandardError
 #   Unknown type 'uuid' for column 'id'
 
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
+  add_foreign_key "localizations", "posts"
+  add_foreign_key "posts", "users"
 end

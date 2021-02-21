@@ -4,9 +4,9 @@ class ApplicationController < ActionController::API
         if !authorization_header
             render json: {message: "Unauthorized"}, status: :unauthorized
         else
-        payload = JsonWebToken.decode(token)
+        payload = JsonWebToken.decode(@token)
         
-        @user = User.find(payload[:user_email])
+        @user = User.find_by(email: payload[:user_email])
         end
         
     rescue  JWT::DecodeError => e

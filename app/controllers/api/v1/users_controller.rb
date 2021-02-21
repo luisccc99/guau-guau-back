@@ -29,7 +29,7 @@ before_action :get_user_id, only: [:update, :destroy, :show]
         if new_user.save()
             render json: new_user, status: :created
         else
-            render json: {message: "Unable to comment."}, status: :conflict
+            render json: {message: "Unable to add new user."}, status: :conflict
         end
     end
 
@@ -42,7 +42,7 @@ before_action :get_user_id, only: [:update, :destroy, :show]
                 render json: {message: "Failed to update."}, status: :unprocessable_entity
             end
         else
-            render json: {message: "Comment not found"}, status: :no_content
+            render json: {message: "User not found"}, status: :no_content
         end
     end
     
@@ -55,13 +55,13 @@ before_action :get_user_id, only: [:update, :destroy, :show]
                 render json: {message: "Failed to delete."}, status: :unprocessable_entity
             end
         else
-            render json: {message: "Comment not found"}, status: :no_content
+            render json: {message: "User not found"}, status: :no_content
         end
     end
 
     private
     def user_params
-        params.require(:user).permit(:email, :password, :name, :lastname, :num_posts, :resolved_posts)
+        params.permit(:email, :password, :name, :lastname, :photo, :num_posts, :resolved_posts)
     end
     def get_user_id
         @found = User.find(params[:id])
