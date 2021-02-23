@@ -7,11 +7,11 @@ class ApplicationController < ActionController::API
             render json: {message: "Unauthorized"}, status: :unauthorized
         else
         payload = JsonWebToken.decode(@token)
-        
         @user = User.find_by(email: payload[:user_email])
         end
         
     rescue  JWT::DecodeError => e
         render json: {errors: e.message}, status: :forbidden  
     end
+
 end

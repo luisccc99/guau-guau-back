@@ -24,10 +24,11 @@ class Api::V1::CommentsController < ApplicationController
 
     #POST
     def create
+        
         new_comment = Comment.new(comment_params)
 
         if new_comment.save()
-            render json: new_comment, status: :created
+            render json: @found_user, status: :created
         else
             render json: {message: "Unable to comment."}, status: :conflict
         end
@@ -42,6 +43,10 @@ class Api::V1::CommentsController < ApplicationController
                     render json: @found, status: :ok
                 else
                     render json: {message: "Failed to update."}, status: :unprocessable_entity
+            if @found.update(comment_params)
+                render json: @found_user, status: :ok
+            else
+                render json: {message: "Failed to update."}, status: :unprocessable_entity
             end
         else
             render json: {message: "Comment not found"}, status: :no_content
@@ -69,5 +74,8 @@ class Api::V1::CommentsController < ApplicationController
     end
     def get_comment_id
         @found = Comment.find(params[:id])
+    end
+    def get_user_id
+        @found_user = Comment.find(params[:user_id])
     end
 end
