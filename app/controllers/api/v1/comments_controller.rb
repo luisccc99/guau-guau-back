@@ -50,6 +50,7 @@ class Api::V1::CommentsController < ApplicationController
             end
         else
             render json: {message: "Comment not found"}, status: :no_content
+            end
         end
     end
 
