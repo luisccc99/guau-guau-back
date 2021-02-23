@@ -69,8 +69,7 @@ class Api::V1::CommentsController < ApplicationController
             else
                 render json: {message: "Access unauthorized."}, status: :unauthorized
             end
-        else
-            render json: {message: "Comment not found"}, status: :no_content
+
         end
     end
 
