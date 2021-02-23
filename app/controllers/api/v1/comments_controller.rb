@@ -37,19 +37,20 @@ class Api::V1::CommentsController < ApplicationController
     #PATCH
     def update
         if @found
-            if @found.user_id != @user.id
+            if @found.user_id != @user.id  
                 render json: {message: "Access unauthorized."}, status: :unauthorized
-            elsif @found.update(comment_params)
-                    render json: @found, status: :ok
+            else
+                if @found.update(comment_params)
+                   render json: @found, status: :ok
                 else
                     render json: {message: "Failed to update."}, status: :unprocessable_entity
-            if @found.update(comment_params)
-                render json: @found_user, status: :ok
-            else
-                render json: {message: "Failed to update."}, status: :unprocessable_entity
-            end
-        else
-            render json: {message: "Comment not found"}, status: :no_content
+                    if @found.update(comment_params)
+                        render json: @found_user, status: :ok
+                    else
+                        render json: {message: "Failed to update."}, status: :unprocessable_entity
+                    end 
+                    render json: {message: "Comment not found"}, status: :no_content
+                end
             end
         end
     end
@@ -59,10 +60,14 @@ class Api::V1::CommentsController < ApplicationController
         if @found
             if @found.user_id != @user.id
                 render json: {message: "Access unauthorized."}, status: :unauthorized
-            elsif @found.destroy()
+            else
+                if @found.destroy()
                     render json: {message: "Comment destroyed"}, status: :ok
                 else
                     render json: {message: "Failed to delete"}, status: :conflict
+                end
+            else
+                render json: {message: "Access unauthorized."}, status: :unauthorized
             end
         else
             render json: {message: "Comment not found"}, status: :no_content
