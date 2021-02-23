@@ -28,18 +28,21 @@ class Api::V1::PostsController < ApplicationController
         new_post = Post.new(post_params)
         
         if new_post.save()
+            new_post.reload
             render json: new_post, status: :ok
         else
             render json: {message: "Unable to add new post."}, status: :conflict
         end
     end
-
+    
     #PATCH
     def update
         if @found
             if @found.user_id != @user.id
                 render json: {message: "Access unauthorized."}, status: :unauthorized
-            elsif @found.update(post_params)
+            else
+                if @found.update(post_params)
+                    @found.reload
                     render json: @found, status: :ok
                 else
                     render json: {message: "Failed to update."}, status: :unprocessable_entity
@@ -55,7 +58,8 @@ class Api::V1::PostsController < ApplicationController
         if @found
             if @found.user_id != @user.id
                 render json: {message: "Access unauthorized."}, status: :unauthorized
-            elsif @found.destroy()
+            else
+                if @found.destroy()
                     render json: {message: "Post destroyed"}, status: :ok
                 else
                     render json: {message: "Failed to delete"}, status: :conflict

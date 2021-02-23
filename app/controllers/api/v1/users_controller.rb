@@ -27,6 +27,7 @@ before_action :get_user_id, only: [:update, :destroy, :show]
         new_user = User.new(user_params)
 
         if new_user.save()
+            new_user.reload
             render json: new_user, status: :created
         else
             render json: {message: "Unable to add new user."}, status: :conflict
@@ -39,6 +40,7 @@ before_action :get_user_id, only: [:update, :destroy, :show]
             if @found.id != @user.id
                 render json: {message: "Access unauthorized."}, status: :unauthorized
                 elsif @found.update(user_params)
+                    @found.reload
                     render json: @found, status: :ok
                 else
                     render json: {message: "Failed to update."}, status: :unprocessable_entity

@@ -5,7 +5,7 @@ class CreatePosts < ActiveRecord::Migration[6.0]
       t.text :body, null: false
       t.string :photo
       t.boolean :resolved, default: false
-      t.string :resolved_reason
+      t.string :resolved_reason, default: false
       
       t.belongs_to :user, foreign_key: true, type: :string
       t.timestamps
