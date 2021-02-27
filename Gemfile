@@ -2,8 +2,12 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
-gem 'carrierwave', '~> 2.1', '>= 2.1.1'
-gem 'cloudinary', '~> 1.18', '>= 1.18.1'
+ gem 'will_paginate'
+ gem 'kaminari'
+ gem 'pagy'
+ gem 'pager_api'
+ gem 'carrierwave', '~> 2.1', '>= 2.1.1'
+ gem 'cloudinary', '~> 1.18', '>= 1.18.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 # Use sqlite3 as the database for Active Record

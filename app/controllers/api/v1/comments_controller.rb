@@ -6,7 +6,8 @@ class Api::V1::CommentsController < ApplicationController
     def index
         comment = Comment.all
         if !comment.empty?
-            render json: comment, status: :ok
+            #render json: comment, status: :ok
+            paginate Comment.unscoped, per_page: 5
         else
             render json: {message: "There's nothing here yet."}, status: :no_content
         end

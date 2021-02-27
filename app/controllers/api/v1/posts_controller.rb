@@ -7,7 +7,8 @@ class Api::V1::PostsController < ApplicationController
     def index
         posts = Post.where("resolved = false", params[:resolved])
         if !posts.empty?
-            render json: posts, status: :ok
+            #render json: posts, status: :ok
+            paginate Post.unscoped, per_page: 10
         else
             render json: {message: "There's nothing here yet."}, status: :no_content
         end
