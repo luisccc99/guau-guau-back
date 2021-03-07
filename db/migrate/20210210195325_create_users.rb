@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :name, null: false
       t.string :lastname, null: false
       t.string :photo
-      t.text :aboutme
+      t.text :aboutme, default: "This is the start of a great adventure rescuing dogs!"
       t.integer :num_posts, default: 0
       t.integer :resolved_posts, default: 0
 
