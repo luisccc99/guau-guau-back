@@ -78,7 +78,7 @@ class Api::V1::CommentsController < ApplicationController
         params.permit(:body, :post_id, :user_id)
     end
     def get_comment_id
-        @found = Comment.find(params[:id])
+        @found = Comment.where("post_id = ?", params[:post_id])
     end
     def get_user_id
         @found_user = Comment.find(params[:user_id])
