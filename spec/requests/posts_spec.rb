@@ -18,8 +18,6 @@ describe 'Posts API', type: :request do
       FactoryBot.create(:post, title: Faker::DcComics.title, body: "I lost my pet", photo: "http://url.com/dh.jpg")
       get api_v1_posts_path
 
-      byebug
-
       expect(response).to have_http_status(:ok)
     end
   end
