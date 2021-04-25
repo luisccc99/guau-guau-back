@@ -17,7 +17,7 @@ class Api::V1::CommentsController < ApplicationController
     #singularGet
     def show
         if @found
-           paginate Comment.unscoped, per_page: 5
+           paginate Comment.unscoped.all.select("*").joins(:user).where("post_id = ?", params[:post_id]), per_page: 5
         else
             render json: {message: "Not found."}, status: :no_content
         end
