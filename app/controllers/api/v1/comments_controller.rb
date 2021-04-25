@@ -17,7 +17,7 @@ class Api::V1::CommentsController < ApplicationController
     #singularGet
     def show
         if @found
-            render json: @found, status: :ok
+           paginate Comment.unscoped, per_page: 5
         else
             render json: {message: "Not found."}, status: :no_content
         end
