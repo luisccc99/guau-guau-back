@@ -17,7 +17,7 @@ class Api::V1::CommentsController < ApplicationController
     #singularGet
     def show
         if @found
-            render json: @found, status: :ok
+           paginate Comment.unscoped, per_page: 5
         else
             render json: {message: "Not found."}, status: :no_content
         end
@@ -75,7 +75,7 @@ class Api::V1::CommentsController < ApplicationController
         params.permit(:body, :post_id, :user_id)
     end
     def get_comment_id
-        @found = Comment.find(params[:id])
+        @found = Comment.where("post_id = ?", params[:post_id])
     end
     def get_user_id
         @found_user = Comment.find(params[:user_id])
