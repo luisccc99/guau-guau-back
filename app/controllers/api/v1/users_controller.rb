@@ -65,7 +65,7 @@ before_action :get_user_id, only: [:update, :destroy, :show]
 
     private
     def user_params
-        params.permit(:email, :password, :name, :lastname, :photo, :aboutme, :num_posts, :resolved_posts)
+        params.permit(:email, :password, :name, :lastname, :user_photo, :aboutme, :num_posts, :resolved_posts)
     end
     def get_user_id
         @found = User.find(params[:id])

@@ -74,7 +74,7 @@ class Api::V1::PostsController < ApplicationController
 
     private
     def post_params
-        params.permit(:title, :body, :photo, :resolved, :resolved_reason, :user_id)
+        params.permit(:title, :body, :publi_photo, :resolved, :resolved_reason, :user_id)
     end
     def get_post_id
         @found = Post.find(params[:id])
