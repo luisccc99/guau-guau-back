@@ -11,7 +11,7 @@ class Api::V1::PostsController < ApplicationController
 
         if !posts.empty?
             #render json: posts, status: :ok
-                paginate Post.unscoped.all.select("body, posts.created_at, posts.id, publi_photo, resolved, resolved_reason, title, posts.updated_at, user_id, users.name, users.lastname, users.user_photo").joins(:user).where("resolved = false", params[:resolved]).order(created_at: :desc), per_page: 10#unscoped.joins(:user).includes(:user)#.where("resolved = false", params[:resolved])#.where(user_id: params[:user_id]), per_page: 10
+                paginate Post.unscoped.all.select("body, posts.created_at, posts.id, publi_photo, resolved, resolved_reason, title, posts.updated_at, longitude, latitude, user_id, users.name, users.lastname, users.user_photo").joins(:user).where("resolved = false", params[:resolved]).order(created_at: :desc), per_page: 10#unscoped.joins(:user).includes(:user)#.where("resolved = false", params[:resolved])#.where(user_id: params[:user_id]), per_page: 10
         else
             render json: {message: "There's nothing here yet."}, status: :no_content
         end
@@ -76,7 +76,7 @@ class Api::V1::PostsController < ApplicationController
 
     private
     def post_params
-        params.permit(:title, :body, :publi_photo, :resolved, :resolved_reason, :user_id)
+        params.permit(:title, :body, :publi_photo, :resolved, :resolved_reason, :longitude, :latitude, :user_id)
     end
     def get_post_id
         @found = Post.find(params[:id])

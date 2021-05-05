@@ -10,22 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_26_002940) do
+ActiveRecord::Schema.define(version: 2021_04_26_013948) do
 
 # Could not dump table "comments" because of following StandardError
 #   Unknown type 'uuid' for column 'id'
 
-# Could not dump table "localizations" because of following StandardError
-#   Unknown type 'uuid' for column 'id'
-
 # Could not dump table "posts" because of following StandardError
-#   Unknown type '' for column 'id'
+#   Unknown type 'uuid' for column 'id'
 
 # Could not dump table "users" because of following StandardError
 #   Unknown type '' for column 'id'
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
-  add_foreign_key "localizations", "posts"
   add_foreign_key "posts", "users"
 end

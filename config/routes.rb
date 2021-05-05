@@ -9,11 +9,6 @@ Rails.application.routes.draw do
         patch 'post', action: :update, controller: :posts
         delete 'post', action: :destroy, controller: :posts
 
-        #Localizations Table
-        get 'localizations', action: :index, controller: :localizations
-        get 'localization', action: :show, controller: :localizations
-        delete 'localization', action: :destroy, controller: :localizations
-
         #Users Table
         get 'users', action: :index, controller: :users
         get 'user', action: :show, controller: :users
