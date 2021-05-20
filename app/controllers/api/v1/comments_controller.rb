@@ -1,6 +1,6 @@
 class Api::V1::CommentsController < ApplicationController
 #Get the id before request for update, delete or find.
-    before_action :authorization, only: [:create, :update, :destroy, :show, :index]
+    #before_action :authorization, only: [:create, :update, :destroy, :show, :index]
     before_action :get_comment_id, only: [:update, :destroy, :show]
     #GET
     def index
